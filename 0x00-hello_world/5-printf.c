@@ -1,7 +1,7 @@
 #include <stdio.h>
 /**
  * main - Prints "with proper grammar.
- * Retur: Always 0.
+ * Return: Always 0.
  */
 int main(void)
 {
