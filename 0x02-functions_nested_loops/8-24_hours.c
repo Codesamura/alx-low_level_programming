@@ -4,7 +4,7 @@
  * h = hour, m = minutes
  * / 10 allows second digit to rotate
  * for loop breaks before exceeding 24:00
- * Return: 24 hour clock 
+ * Return: 24 hour clock
  */
 void jack_bauer(void)
 {
