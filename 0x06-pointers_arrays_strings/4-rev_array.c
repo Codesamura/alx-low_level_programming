@@ -5,12 +5,12 @@
  * @n: number of elements of the array
  * Return: rev
  */
-void reverse-array(int *a, int n)
+void reverse_array(int *a, int n)
 {
 	int i;
 	int j;
 
-	for (i = 0; i < n; i++;)
+	for (i = 0; i < n; i++)
 	{
 		n--;
 		j = a[i];
