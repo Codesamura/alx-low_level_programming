@@ -5,15 +5,15 @@
  * @n: pointer
  * Return: char
  */
-char *string_toupper(char *n)
+char *string_toupper(char *a)
 {
 	int i;
 
 	i = 0;
-	while (n[i] != '\0')
+	while (a[i] != '\0')
 	{
-		if (n[i] >= 'a' && n[i] <= 'z')
-			n[i] = n[i] - 32;
+		if (a[i] >= 'a' && a[i] <= 'z')
+			a[i] = a[i] - 32;
 		i++;
 	}
 	return (0);
