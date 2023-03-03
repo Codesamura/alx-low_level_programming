@@ -1,28 +1,35 @@
 #include "main.h"
 /**
  * cap_string - capitalizes all words of a string
- * @n: The string to look at
+ * @str: The string to look at
  * Return: the capitalized string
  */
-char *cap_string(char *n)
+char *cap_string(char *str)
 {
 	int i = 0;
-	int j;
 
-	char brainBox[] = " \n\t,;.!?\"(){}";
-
-	if (n[0] >= 'a' && n[0] <= 'z')
-		n[0] -= 32;
-	for (; n[i] != '\0'; i++)
+	while (str[i])
 	{
-		for (j = 0; j < 14; j++)
-		{
-			if (z[i] == brainBox[j])
-			{
-				if (n[i + 1] >= 'a' && n[i + 1] <= 'z')
-					n[i + 1] -= 32;
-			}
-		}
+		while (!(str[i] >= 'a' && str[i] <= 'z'))
+			i++;
+		if (str[i - 1] == ' ' ||
+				str[i - 1] == '\t' ||
+				str[i - 1] == '\n' ||
+				str[i - 1] == ',' ||
+				str[i - 1] == ';' ||
+				str[i - 1] == '.' ||
+				str[i - 1] == '!' ||
+				str[i - 1] == '?' ||
+				str[i - 1] == '"' ||
+				str[i - 1] == '(' ||
+				str[i - 1] == ')' ||
+				str[i - 1] == '{' ||
+				str[i - 1] == '}' ||
+				i == 0)
+			str[i] -= 32;
+		
+		i++;
 	}
-	return (n);
+
+	return (str);
 }
