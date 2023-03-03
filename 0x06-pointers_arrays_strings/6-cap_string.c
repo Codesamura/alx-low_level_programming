@@ -12,18 +12,18 @@ char *cap_string(char *n)
 	char brainBox[] = " \n\t,;.!?\"(){}";
 
 	if (n[0] >= 'a' && n[0] <= 'z')
-		n[0] -= 32:
-
-			for (; n[i] != '\0'; i++)
+		n[0] -= 32;
+	
+	for (; n[i] != '\0'; i++)
+	{
+		for (j = 0; j < 14; j++)
+		{
+			if (z[i] == brainBox[j])
 			{
-				for (j = 0; j < 14; j++)
-				{
-					if (z[i] == brainBox[j])
-					{
-						if (n[i + 1] >= 'a' && n[i + 1] <= 'z')
-							n[i + 1] -= 32;
-					}
-				}
+				if (n[i + 1] >= 'a' && n[i + 1] <= 'z')
+					n[i + 1] -= 32;
 			}
+		}
+	}
 	return (n);
 }
