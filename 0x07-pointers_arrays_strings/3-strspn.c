@@ -14,7 +14,7 @@ unsigned int _strspn(char *s, char *accept)
 
 	while (s[mat])
 	{
-		for (letter = 0;accept[letter]; letter++)
+		for (letter = 0; accept[letter]; letter++)
 		{
 			if (accept[letter] == s[mat])
 			{
