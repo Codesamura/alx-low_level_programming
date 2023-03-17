@@ -2,12 +2,12 @@
 #include "main.h"
 
 /**
- * main - .....
+ * mul- .....
  * num1: First number
  * num2: Second number
  * Return: Nothing
  */
-int main(void)
+int mul(void)
 {
 	int num1, num2, mul;
 
