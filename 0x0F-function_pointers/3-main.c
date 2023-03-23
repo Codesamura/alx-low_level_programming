@@ -21,12 +21,12 @@ int main(int argc, char *argv[])
 
 	oprt = get_op_func(argv[2]);
 
-	if (!ooprt)
+	if (!oprt)
 	{
 		printf("Error\n");
 		exit(99);
 	}
 
-	printf("%d\n",oprt(atoi9argv[1], atoi(argv[3])));
+	printf("%d\n", oprt(atoi(argv[1]), atoi(argv[3])));
 	return (0);
 }
