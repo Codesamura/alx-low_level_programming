@@ -4,6 +4,7 @@
 #include "lists.h"
 
 /**
+ * print_listint_safe - prints and saves
  * main - check the code
  *
  * Return: Always 0.
