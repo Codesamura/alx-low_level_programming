@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * flip_bits - Finds the number of bits needed to flip to
  * change one number
@@ -9,19 +8,13 @@
  *
  * Return: Number of bits neede to flip.
  */
-
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	unsigned long int nlent;
-	unsigned long int mlent;
-	unsigned long int flip;
-	unsigned long int storagen;
-	unsigned long int storagem;
+	unsigned long int nlent, mlent, flip, storagen, storagem;
 
 	nlent = mlent = flip = 0;
 	storagen = n;
 	storagem = m;
-
 	while (n > 0)
 	{
 		n = n >> 1;
@@ -34,7 +27,6 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 	}
 	m = storagem;
 	n = storagen;
-
 	if (mlent > nlent)
 	{
 		while (mlent > 0)
