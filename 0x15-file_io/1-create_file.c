@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
 #include "main.h"
 
 /**
- * create_file - check the code for Holberton School students.
- * @filename: name of the file
- * @text_content: number of the letters that i used
+ * create_file - Name of the file to create.
+ * @filename: name of the file to create.
+ * @text_content: number of the letters in the file
  * Return: Always 0.
  */
 
@@ -29,7 +27,7 @@ int create_file(const char *filename, char *text_content)
 	{
 		return (-1);
 	}
-	wrf = write(ID, text_content, count);
+	wrf = write(fld, text_content, count);
 	if (wrf == -1)
 	{
 		return (-1);
