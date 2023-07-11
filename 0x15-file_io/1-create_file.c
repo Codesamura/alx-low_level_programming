@@ -1,37 +1,38 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "main.h"
-
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <main.h>
 /**
- * create_file - Name of the file to create.
- * @filename: name of the file to create.
- * @text_content: number of the letters in the file
- * Return: Always 0.
+ * create_file - creates a function that creates a file.
+ *
+ * @filename: name of the  file
+ * @text_content: text to put into file
+ *
+ * Return: 1 on success, -1 on failure
  */
-
 int create_file(const char *filename, char *text_content)
 {
-	int fld = 0, wrf = 0, count = 0;
+	int file;
+	int length = 0, inlen = 0;
+	char *ptr;
 
 	if (filename == NULL)
-	{
 		return (-1);
-	}
+
+	file = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	if (file == -1)
+		return (-1);
+
 	if (text_content != NULL)
 	{
-		for (count = 0; text_content[count] != '\0'; count++)
-		{}
+		for (inlen = 0, ptr = text_content; *ptr; ptr++)
+			inlen++;
+		length = write(file, text_content, inlen);
 	}
-	fld = open(filename, O_CREAT | O_TRUNC | O_WRONLY, 0600);
-	if (fld == -1)
-	{
+
+	if (close(file) == -1 || inlen != length)
 		return (-1);
-	}
-	wrf = write(fld, text_content, count);
-	if (wrf == -1)
-	{
-		return (-1);
-	}
-	close(fld);
 	return (1);
 }
