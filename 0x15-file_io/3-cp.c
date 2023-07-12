@@ -5,57 +5,57 @@
 #include <fcntl.h>
 #include <stdio.h>
 /**
- * close_errchk - closes a file descriptor and prints
+ * c_errchk - closes a file descriptor and prints
  * an error message if it fails
  *
- * @fd: file descriptor to close
+ * @fd1: file descriptor to close
  *
  * Return: 0 on success, -1 on failure
  */
-int close_errchk(int fd)
+int c_errchk(int fd1)
 {
-	int err;
+	int error;
 
-	err = close(fd);
-	if (err == -1)
+	error = close(fd1);
+	if (error == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		dprintf(STDERR_FILENO, "Error: Can't close fd1 %d\n", fd1);
 		return (100);
 	}
 	return (0);
 }
 
 /**
- * write_err - error handler for a write error
+ * write_error - error handler for a write error
  *
- * @fd1: first descriptor to close
- * @fd2: second descriptor to close
- * @filename: filename prompting the error
+ * @fd2: first descriptor to close
+ * @fd3: second descriptor to close
+ * @nameoffile: filename prompting the error
  *
  * Return: 99
  */
-int write_err(int fd1, int fd2, char *filename)
+int write_error(int fd2, int fd3, char *nameoffile)
 {
-	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
-	close_errchk(fd1);
-	close_errchk(fd2);
+	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", nameoffile);
+	c_errchk(fd2);
+	c_errchk(fd3);
 	return (99);
 }
 
 /**
- * read_err - error handler for a read error
+ * read_error - error handler for a read error
  *
- * @fd1: first descriptor to close
- * @fd2: second descriptor to close
- * @filename: filename prompting the error
+ * @fd2: first descriptor to close
+ * @fd3: second descriptor to close
+ * @nameoffile: filename prompting the error
  *
  * Return: 98
  */
-int read_err(int fd1, int fd2, char *filename)
+int read_error(int fd2, int fd3, char *nameoffile)
 {
-	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
-	close_errchk(fd1);
-	close_errchk(fd2);
+	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", nameoffile);
+	c_errchk(fd2);
+	c_errchk(fd3);
 	return (98);
 }
 
@@ -63,8 +63,8 @@ int read_err(int fd1, int fd2, char *filename)
  * main - copy one file to another, new file with perms 664
  * usage - cp file_from file_to
  *
- * @ac: number of arg
- * @av: list of args
+ * @arg: number of arg
+ * @avg: list of args
  *
  * Return: 97 if incorrect num of args
  * 98 if file_from does not exist or unreadable
@@ -72,41 +72,41 @@ int read_err(int fd1, int fd2, char *filename)
  * 100 if file close fails
  * 0 otherwise
  */
-int main(int ac, char *av[])
+int main(int arg, char *avg[])
 {
 	char buf[1024];
 	int lenr, lenw, file_from, file_to, err;
 
-	if (ac != 3)
+	if (arg != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		return (97);
 	}
-	file_from = open(av[1], O_RDONLY);
+	file_from = open(avg[1], O_RDONLY);
 	if (file_from == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
-			av[1]);
+			avg[1]);
 		return (98);
 	}
-	file_to = open(av[2], O_WRONLY | O_CREAT | O_TRUNC,
+	file_to = open(avg[2], O_WRONLY | O_CREAT | O_TRUNC,
 		       S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if (file_to == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
-		close_errchk(file_from);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", avg[2]);
+		c_errchk(file_from);
 		return (99);
 	}
 	do {
 		lenr = read(file_from, buf, 1024);
 		if (lenr == -1)
-			return (read_err(file_from, file_to, av[1]));
+			return (read_error(file_from, file_to, avg[1]));
 		lenw = write(file_to, buf, lenr);
 		if (lenw == -1 || lenw != lenr)
-			return (write_err(file_from, file_to, av[2]));
+			return (write_error(file_from, file_to, avg[2]));
 	} while (lenr == 1024);
-	err = close_errchk(file_from);
-	err += close_errchk(file_to);
+	err = c_errchk(file_from);
+	err += c_errchk(file_to);
 	if (err != 0)
 		return (100);
 	return (0);
